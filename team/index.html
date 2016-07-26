@@ -2,7 +2,7 @@
 layout: team_page
 title: Team
 excerpt: "Team Page of IIT HeartBeat"
-modified: 2016-01-19
+modified: 2016-07-26
 image:
   feature: team_background.jpg
   title: Meet The Team.
@@ -23,7 +23,6 @@ function v()
             }, function() {
                 e.removeClass("over-team-card");
             });
-            console.log("ab");
     	}
 function outputTeamData()
 {
@@ -55,40 +54,47 @@ function outputTeamData()
         v();
     });
 }
-
-
 outputTeamData();
-
-    $(document).ready(function($){
-
-    	$("#employee-search-box").focus();
-            $("#employee-search-box").on("input", function() {
-            	
-                var e = $(this).val().toLowerCase();
-                var a = $(".team-card");
-                var t = [];
-                a.each(function(a, i) {
-                    var o = $(i).text().toLowerCase();
-                    if (e === "" || o.indexOf(e) >= 0) {
-                        t.push(i);
-                    };
-                });
-                a.css("display", "none");
-                $(t).css("display", "");
-            });
+var defaultSearchBarPosition;
+var a = false;
+function searchBarFix()
+{
+    var t=$(document).scrollTop();
+    var i=t>defaultSearchBarPosition;
+    if(a!==i)
+    {
+        a=i;
+        $(".employee-search").toggleClass("fixed",i);
+    }
+}
+$(document).ready(function($){
+    $("#employee-search-box").on("input", function() {        	
+        var e = $(this).val().toLowerCase();
+        var a = $(".team-card");
+        var t = [];
+        a.each(function(a, i) {
+            var o = $(i).text().toLowerCase();
+            if (e === "" || o.indexOf(e) >= 0) {
+                t.push(i);
+            };
+        });
+        a.css("display", "none");
+        $(t).css("display", "");
     });
+    defaultSearchBarPosition = $("#the-team").offset().top;
+    $(window).on("scroll",searchBarFix);
+    $(window).on("resize",searchBarFix);    
+});
         
 </script>
 <div id="the-team">
-                     <div class="employee-search">
-                        <input type="text" placeholder="Search by name or position..." id="employee-search-box">
-                     </div>
-                     <div class="employee-search-spacer"></div>
-                     <div class="portrait-container" style="padding-bottom: 346px;">
-                     	
-                        
-                     </div>
-                     <div style="text-align: center;">
-                        <p>Text to be added!..</p>
-                     </div>
-                     <p>&nbsp;</p>
+    <div class="employee-search">
+        <input type="text" placeholder="Search by name or position..." id="employee-search-box">
+    </div>
+    <div class="employee-search-spacer"></div>
+    <div class="portrait-container" style="padding-bottom: 292px;"><!-- Team Data Will be added here! --></div>
+    <div style="text-align: center;">
+        <p>Text to be added!..</p>
+    </div>
+    <p>&nbsp;</p>
+</div>
