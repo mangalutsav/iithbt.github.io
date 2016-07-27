@@ -24,27 +24,69 @@ function v()
                 e.removeClass("over-team-card");
             });
     	}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function shuffle(array) {
+    var i = 4,
+        j,
+        temp;
+
+    while (i++ < (array.length - 1)) {
+
+        j = getRandomInt(5,i);
+
+        // swap randomly chosen element with current element
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+
+    }
+
+    return array;
+}
+
 function outputTeamData()
 {
 	$.get("teamData.json", function(data, status){
         if(status)
         {
+            data = shuffle(data);
         	for(var i=0;i<data.length;i++)
         	{
         		var $team_card = $("<div>", {"class": "team-card"});
         		var $card_photo = $("<div>",{"class": "card-photo"});
-        		var $img_normal = $("<img>",{"src": data[i].img_normal});
+        		var $img_normal = $("<img>",{"src": "images/"+data[i].img_normal});
         		if(data[i].img_alternate)
         		{
         			$img_normal.attr("class","normal");
-        			var $img_alternate = $("<img>",{"src": data[i].img_alternate,"class" : "alternate"});
+        			var $img_alternate = $("<img>",{"src": "images/"+data[i].img_alternate,"class" : "alternate"});
         			$card_photo.append($img_alternate);
         		}
         		$card_photo.append($img_normal);
         		var $card_info =  $("<div>",{"class" : "card-info"});
-        		$card_info.html('<h2 class="pulls">'+data[i].name+'</h2><h3>'+data[i].position+'</h3><p>'+data[i].description+'</p>');
+        		$card_info.html('<h2 class="pulls">'+data[i].name+'</h2>');
+                if(data[i].position instanceof Array)
+                {
+                    jQuery.each(data[i].position, function(index, item) {
+                        var $h3 = $("<h3>");
+                        $h3.html(item);
+                        if(index < (data[i].position.length-1))
+                            $h3.attr("style","margin-bottom: 0");
+                        $card_info.append($h3);     
+                    });
+                }
+                else
+                    $card_info.append('<h3>'+data[i].position+'</h3>');
+                
+                $card_info.append('<p>'+data[i].description+'</p>');
         		var $contact_links = $("<p>",{"class" : "contact-links"});
-        		$contact_links.html('<a href="http://twitter.com/'+data[i].twitter+'" class="contact-twitter"></a><a href="http://facebook.com/'+data[i].facebook+'" class="contact-facebook"></a>');
+                if(data[i].twitter != "")
+                    $contact_links.append('<a href="http://twitter.com/'+data[i].twitter+'" class="contact-twitter" target="_blank"></a>');
+                if(data[i].facebook != "")
+                    $contact_links.append('<a href="http://facebook.com/'+data[i].facebook+'" class="contact-facebook" target="_blank"></a>');
+        		
         		$card_info.append($contact_links);
         		$team_card.append($card_photo);
         		$team_card.append($card_info);

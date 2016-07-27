@@ -10,7 +10,7 @@
   },
   {
     "name": "Ashish",
-    "position": "Vice President Design Head",
+    "position": ["Vice President","Design Head"],
     "img_normal": "Ashish.jpg",
     "img_alternate": "Ashish.jpg",
     "description": "",
@@ -30,14 +30,14 @@
     "name": "Murtuza",
     "position": "Finance Head",
     "img_normal": "Murtuza.jpg",
-    "img_alternate": "Murtuza.jpg",
+    "img_alternate": "Murtuza1.jpg",
     "description": "",
     "twitter": "",
-    "facebook": "murtuza.merchant.54?"
+    "facebook": "murtuza.merchant.54"
   },
   {
     "name": "Nabarun",
-    "position": "Web D Head",
+    "position": "Web Developer Head",
     "img_normal": "Nabarun.jpg",
     "img_alternate": "Nabarun.jpg",
     "description": "",
@@ -46,16 +46,15 @@
   },
   {
     "name": "Chirag",
-    "position": "Web D Team",
+    "position": "Web & Android Developer",
     "img_normal": "Chirag.jpg",
-    "img_alternate": "Chirag.jpg",
-    "description": "",
-    "twitter": "",
+    "description": "Sophomore | Geek | Enthusiast",
+    "twitter": "csoni11",
     "facebook": "cmaheshwari11"
   },
   {
     "name": "Utsav",
-    "position": "Web D Team",
+    "position": "Web Developer",
     "img_normal": "Utsav.jpg",
     "img_alternate": "Utsav.jpg",
     "description": "Developer, Panda, Food Enthusiast",
@@ -64,7 +63,7 @@
   },
   {
     "name": "Rahul",
-    "position": "Web D Team Finance Team",
+    "position": ["Web Developer","Finance Team"],
     "img_normal": "Rahul.jpg",
     "img_alternate": "Rahul.jpg",
     "description": "",
@@ -78,7 +77,7 @@
     "img_alternate": "Swapnil.jpg",
     "description": "",
     "twitter": "",
-    "facebook": "profile.php?id=100004716075755&fref=ts"
+    "facebook": "profile.php?id=100004716075755"
   },
   {
     "name": "Rishabh",
@@ -87,7 +86,7 @@
     "img_alternate": "Rishabh.jpg",
     "description": "",
     "twitter": "",
-    "facebook": "profile.php?id=100001425739218&fref=ts"
+    "facebook": "profile.php?id=100001425739218"
   },
   {
     "name": "Aditya",
