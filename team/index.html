@@ -52,49 +52,59 @@ function outputTeamData()
 	$.get("teamData.json", function(data, status){
         if(status)
         {
-            data = shuffle(data);
-        	for(var i=0;i<data.length;i++)
+            var present_members = shuffle(data[0].members);
+        	for(var i=0;i<present_members.length;i++)
         	{
-        		var $team_card = $("<div>", {"class": "team-card"});
-        		var $card_photo = $("<div>",{"class": "card-photo"});
-        		var $img_normal = $("<img>",{"src": "images/"+data[i].img_normal});
-        		if(data[i].img_alternate)
-        		{
-        			$img_normal.attr("class","normal");
-        			var $img_alternate = $("<img>",{"src": "images/"+data[i].img_alternate,"class" : "alternate"});
-        			$card_photo.append($img_alternate);
-        		}
-        		$card_photo.append($img_normal);
-        		var $card_info =  $("<div>",{"class" : "card-info"});
-        		$card_info.html('<h2 class="pulls">'+data[i].name+'</h2>');
-                if(data[i].position instanceof Array)
-                {
-                    jQuery.each(data[i].position, function(index, item) {
-                        var $h3 = $("<h3>");
-                        $h3.html(item);
-                        if(index < (data[i].position.length-1))
-                            $h3.attr("style","margin-bottom: 0");
-                        $card_info.append($h3);     
-                    });
-                }
-                else
-                    $card_info.append('<h3>'+data[i].position+'</h3>');
-                
-                $card_info.append('<p>'+data[i].description+'</p>');
-        		var $contact_links = $("<p>",{"class" : "contact-links"});
-                if(data[i].twitter != "")
-                    $contact_links.append('<a href="http://twitter.com/'+data[i].twitter+'" class="contact-twitter" target="_blank"></a>');
-                if(data[i].facebook != "")
-                    $contact_links.append('<a href="http://facebook.com/'+data[i].facebook+'" class="contact-facebook" target="_blank"></a>');
-        		
-        		$card_info.append($contact_links);
-        		$team_card.append($card_photo);
-        		$team_card.append($card_info);
-        		$(".portrait-container").append($team_card);
+        		$("#present-members").append(createTeamCard(present_members[i]));
         	}
+
+            var past_members = shuffle(data[1].members);
+            for(var i=0;i<past_members.length;i++)
+            {
+                $("#past-members").append(createTeamCard(past_members[i]));
+            }
         }
         v();
     });
+}
+function createTeamCard(data)
+{
+    var $team_card = $("<div>", {"class": "team-card"});
+    var $card_photo = $("<div>",{"class": "card-photo"});
+    var $img_normal = $("<img>",{"src": "images/"+data.img_normal});
+    if(data.img_alternate)
+    {
+        $img_normal.attr("class","normal");
+        var $img_alternate = $("<img>",{"src": "images/"+data.img_alternate,"class" : "alternate"});
+        $card_photo.append($img_alternate);
+    }
+    $card_photo.append($img_normal);
+    var $card_info =  $("<div>",{"class" : "card-info"});
+    $card_info.html('<h2 class="pulls">'+data.name+'</h2>');
+    if(data.position instanceof Array)
+    {
+        jQuery.each(data.position, function(index, item) {
+            var $h3 = $("<h3>");
+            $h3.html(item);
+            if(index < (data.position.length-1))
+                $h3.attr("style","margin-bottom: 0");
+            $card_info.append($h3);     
+        });
+    }
+    else
+        $card_info.append('<h3>'+data.position+'</h3>');
+    
+    $card_info.append('<p>'+data.description+'</p>');
+    var $contact_links = $("<p>",{"class" : "contact-links"});
+    if(data.twitter != "")
+        $contact_links.append('<a href="http://twitter.com/'+data.twitter+'" class="contact-twitter" target="_blank"></a>');
+    if(data.facebook != "")
+        $contact_links.append('<a href="http://facebook.com/'+data.facebook+'" class="contact-facebook" target="_blank"></a>');
+    
+    $card_info.append($contact_links);
+    $team_card.append($card_photo);
+    $team_card.append($card_info);
+    return $team_card;
 }
 outputTeamData();
 var defaultSearchBarPosition;
@@ -134,9 +144,18 @@ $(document).ready(function($){
         <input type="text" placeholder="Search by name or position..." id="employee-search-box">
     </div>
     <div class="employee-search-spacer"></div>
-    <div class="portrait-container" style="padding-bottom: 292px;"><!-- Team Data Will be added here! --></div>
-    <div style="text-align: center;">
-        <p>Text to be added!..</p>
+    <div id="present-members" class="portrait-container" style="padding-bottom: 292px;">
+    <!-- Team Data Will be added here! -->
+        <h2 align="center">Present Members</h2>
+    </div>
+    <div id="divider">
+        <img style="width:200px;margin-left:auto;margin-right:auto;display:block;" src="../images/divider.png" />
+    </div>
+    <div id="past-members" class="portrait-container" style="padding-bottom: 292px;">
+        <h2 align="center">Past Members</h2>
+    </div>
+    <div class="end-quote" style="text-align: center;">
+        <p style="font-family: 'Lovers Quarrel', cursive;font-size:55px;color: #5f2f2f;">" The strength of the team is each individual member.<br />The strength of each member is the team. "</p>
     </div>
     <p>&nbsp;</p>
 </div>
