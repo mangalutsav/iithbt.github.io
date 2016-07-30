@@ -221,6 +221,18 @@ span + .entry-title {
 		@include span-columns(12);
 	}
 }
+#home_page {
+	.entry-wrapper {
+		max-width: 90%;
+	}
+	.entry-title {
+		text-align: center;
+		max-width: 100%;
+	}
+	.entry-content {
+		@include span-columns(12);
+	}
+}
 
 /*
    Kramdown generated table of contents
