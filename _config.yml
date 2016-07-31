@@ -49,14 +49,14 @@ titlecase: true
 # Site owner
 owner:
   name: IIT HeartBeat
-  avatar: hbt-logo.jpg
+  avatar: site-logo.png
   email: iithbt@gmail.com
   disqus-shortname:
   twitter: #username
   facebook: iitheartbeat
   google:
-    plus: #username
-    analytics:
+    plus: 101167412884532140788
+    analytics: UA-67220202-1
     verify:
     ad-client:
     ad-slot:
