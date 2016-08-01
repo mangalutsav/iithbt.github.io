@@ -1,14 +1,130 @@
 ---
 layout: home_page
-title: Home
-headline: New Issue
-excerpt: "A simple and clean responsive Jekyll theme for words and photos."
+excerpt: "THE HOME PAGE OF IITHbt"
 search_omit: true
 ---
+<link rel="stylesheet" type="text/css" href ="assets/css/demo1.css">
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-<script type="text/javascript" src="//e.issuu.com/embed.js" async="true"></script>
-<div data-configid="0/4583681" style="width:525px; height:340px;" class="issuuembed"></div>
+<link rel="stylesheet" type="text/css" href="assets/css/default.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/bookblock.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+function createImageId(i) {
+	var $a = $("<div>", {"class": "bb-item"});
+	var $img = $("<img>",{"src": "images/newmags/file-page"+i+".jpg"});
+	$a.append($img);
+	return $a;
+}
+function additem() {
+	for (var i = 1; i <= 40; i++) {
+		console.log(createImageId(i));
+		$(".bb-bookblock").append(createImageId(i));
+	};
+}
+
+</script>
+<script src="assets/js/modernizr.custom.js"></script>
+<div class="main clearfix">
+	<div class="bb-custom-wrapper">
+		<div id="bb-bookblock" class="bb-bookblock">
+		</div>
+		<nav>
+			<a id="bb-nav-first" href="#" class="bb-custom-icon bb-custom-icon-first">First page</a>
+			<a id="bb-nav-prev" href="#" class="bb-custom-icon bb-custom-icon-arrow-left">Previous</a>
+			<a id="bb-nav-next" href="#" class="bb-custom-icon bb-custom-icon-arrow-right">Next</a>
+			<a id="bb-nav-last" href="#" class="bb-custom-icon bb-custom-icon-last">Last page</a>
+		</nav>
+	</div>
+</div>
+
 {% for post in site.posts limit:3 %}
   <li><article><h2><a href="{{ site.url }}{{ post.url }}">{{ post.title }} </h2><span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></span>{% if post.excerpt %} <p>{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</p>{% endif %}</a></article></li>
 {% endfor %}
 </ul>
+<script type="text/javascript">additem();</script>
+
+<script src="assets/js/jquerypp.custom.js"></script>
+<script src="assets/js/jquery.bookblock.js"></script>
+<script>
+			var Page = (function() {
+				
+				var config = {
+						$bookBlock : $( '#bb-bookblock' ),
+						$navNext : $( '#bb-nav-next' ),
+						$navPrev : $( '#bb-nav-prev' ),
+						$navFirst : $( '#bb-nav-first' ),
+						$navLast : $( '#bb-nav-last' )
+					},
+					init = function() {
+						config.$bookBlock.bookblock( {
+							speed : 1000,
+							shadowSides : 0.8,
+							shadowFlip : 0.7
+						} );
+						initEvents();
+					},
+					initEvents = function() {
+						
+						var $slides = config.$bookBlock.children();
+
+						// add navigation events
+						config.$navNext.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'next' );
+							return false;
+						} );
+
+						config.$navPrev.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'prev' );
+							return false;
+						} );
+
+						config.$navFirst.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'first' );
+							return false;
+						} );
+
+						config.$navLast.on( 'click touchstart', function() {
+							config.$bookBlock.bookblock( 'last' );
+							return false;
+						} );
+						
+						// add swipe events
+						$slides.on( {
+							'swipeleft' : function( event ) {
+								config.$bookBlock.bookblock( 'next' );
+								return false;
+							},
+							'swiperight' : function( event ) {
+								config.$bookBlock.bookblock( 'prev' );
+								return false;
+							}
+						} );
+
+						// add keyboard events
+						$( document ).keydown( function(e) {
+							var keyCode = e.keyCode || e.which,
+								arrow = {
+									left : 37,
+									up : 38,
+									right : 39,
+									down : 40
+								};
+
+							switch (keyCode) {
+								case arrow.left:
+									config.$bookBlock.bookblock( 'prev' );
+									break;
+								case arrow.right:
+									config.$bookBlock.bookblock( 'next' );
+									break;
+							}
+						} );
+					};
+
+					return { init : init };
+
+			})();
+		</script>
+		<script>
+				Page.init();
+		</script>
