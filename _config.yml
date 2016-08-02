@@ -3,7 +3,7 @@
 title: IIT HeartBeat
 locale: en_US
 description: IIT HeartBeat is the official Inter-IIT Magazine. It provides insight into the activities of all IIT's.
-logo: site-logo.png
+logo: iit-hbt.png
 search: true
 url: http://localhost:4000
 
@@ -49,7 +49,7 @@ titlecase: true
 # Site owner
 owner:
   name: IIT HeartBeat
-  avatar: site-logo.png
+  avatar: iit-hbt.png
   email: iithbt@gmail.com
   disqus-shortname:
   twitter: #username
