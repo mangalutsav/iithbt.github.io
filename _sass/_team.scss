@@ -1,3 +1,20 @@
+
+div.end-quote { 
+    text-align: center;
+}
+
+div.end-quote .quote-text {
+    font-family: 'Lovers Quarrel', cursive;
+    font-size:30px;
+    color: #5f2f2f;
+    @include media($medium) {
+        font-size: 40px;
+    }
+    @include media($large) {
+        font-size: 50px;
+    }
+}
+
 .employee-search-spacer {
     height: 50px
 }
