@@ -1,7 +1,7 @@
 .bb-bookblock {
 	text-align: center;
-	width: 700px;
-	height: 906px;
+	width: 60%;
+	height: auto;
 	margin: 0 auto;
 	position: relative;
 	z-index: 100;
@@ -11,8 +11,12 @@
 	backface-visibility: hidden;
 }
 .bb-bookblock .bb-item img {
-	width: inherit;
-	height: inherit;
+	width: 100%;
+	height: auto;
+}
+.bb-inner img {
+	width: 100%;
+	height: auto;
 }
 
 .bb-page {
@@ -43,9 +47,7 @@
 .bb-outer,
 .bb-content,
 .bb-inner {
-	position: absolute;
-	height: 100%;
-	width: 100%;
+	position: relative;
 	top: 0;
 	left: 0;
 	/*box-shadow: 0px 0px 30px #888999;*/
@@ -81,6 +83,11 @@
 	width: 100%;
 	overflow: hidden;
 	z-index: 999;
+}
+
+.bb-front,
+.bb-back {
+	position: absolute;
 }
 
 .bb-overlay, 
@@ -169,7 +176,7 @@
 .bb-item {
 	width: 100%;
 	height: 100%;
-	position: absolute;
+	position: relative;
 	top: 0;
 	left: 0;
 	display: none;

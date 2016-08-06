@@ -217,6 +217,7 @@
 			s_left.style.zIndex = 102;
 			s_middle.style.zIndex = 103;
 			s_right.style.zIndex = 101;
+			s_right.style.position = "relative";
 
 			s_middle.style.transitionDuration = speed + 'ms';
 			s_middle.style.transitionTimingFunction = this.options.easing;
