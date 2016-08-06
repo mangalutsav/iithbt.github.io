@@ -8,8 +8,11 @@
 /*
    Post archive
    ========================================================================== */
+   
+  .post-content{
+    width: 75%;
+  }
 .post-thumb{
-    float: left;
     width: 20%;
   }
   .post-content{
@@ -39,12 +42,28 @@
   a > span {
     float: left;
   }
+  .post-title {
+    font-size :2rem;
+    font-weight : bold;
+
+    
+  }
   .entry-date {
     padding: 0px 0;
     @include font-size(10,no);
     text-transform: uppercase;
-    line-height: 1.2;
-    display: none;
+    line-height: 1;
+    display: block;
+    @include media($medium) {
+      display: inline;
+    }
+  }
+  .entry-author {
+    padding: 0px 0;
+    @include font-size(10,no);
+    text-transform: lowercase;
+    line-height: 1;
+    display: block;
     @include media($medium) {
       display: inline;
     }
