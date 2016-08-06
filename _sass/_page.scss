@@ -155,6 +155,7 @@ span + .entry-title {
 		width: 150px;
 		height: 150px;
 		margin-bottom: 10px;
+		object-fit: cover;
 		@include rounded(150px);
 		@include clearfix;
 	}

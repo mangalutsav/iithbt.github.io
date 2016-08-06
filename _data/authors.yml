@@ -1,20 +1,17 @@
 # Authors
 
-billy_rick:
-  name: Billy Rick
-  web: http://thewhip.com
-  email: billy@rick.com
-  bio: "What do you want, jewels? I am a very extravagant man."
-  avatar: bio-photo-2.jpg
-  twitter: extravagantman
-  google:
-    plus: BillyRick
+shubham:
+  name: Shubham Palod
+  web: https://www.fb.com/shubham.pallod.7
+  email: pallodshubhamm@gmail.com
+  bio: "Editorial Chief"
+  avatar: /team/images/Shubham.jpg
 
-cornelius_fiddlebone:
-  name: Cornelius Fiddlebone
-  email: cornelius@thewhip.com
-  bio: "I ordered what?"
-  avatar: bio-photo.jpg
-  twitter: rhymeswithsackit
-  google:
-    plus: CorneliusFiddlebone
+# cornelius_fiddlebone:
+#   name: Cornelius Fiddlebone
+#   email: cornelius@thewhip.com
+#   bio: "I ordered what?"
+#   avatar: bio-photo.jpg
+#   twitter: rhymeswithsackit
+#   google:
+#     plus: CorneliusFiddlebone

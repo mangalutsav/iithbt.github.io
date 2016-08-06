@@ -43,8 +43,9 @@ search_omit: true
 		</nav>
 	</div>
 </div>
+<ul class="post-list" style="list-style-type:disc;margin-right:20px;margin-left:20px;" >
 {% for post in site.posts limit:3 %}
-  <li><article><a href="{{ site.url }}{{ post.url }}"><h2>{{ post.title }} </h2><span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>{% if post.author %}{{ post.author }}{% endif %}</span>{% if post.excerpt %} <p>{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</p>{% endif %}</a></article></li>
+  <li><article><a href="{{ site.url }}{{ post.url }}"><div class="post-title">{{ post.title }} </div><div><span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></span>{% if post.author %}<span class="entry-author"> - {{ site.data.authors[post.author].name }}</span>{% endif %}</div>{% if post.excerpt %} <p>{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</p>{% endif %}</a></article></li>
 {% endfor %}
 </ul>
 <script type="text/javascript">
