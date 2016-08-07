@@ -1,29 +1,36 @@
 ---
 layout: home_page
-excerpt: "THE HOME PAGE OF IITHbt"
+excerpt: "The Home Page of IIT HeartBeat"
 search_omit: true
 ---
 <link rel="stylesheet" type="text/css" href ="assets/css/demo1.css">
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-<link rel="stylesheet" type="text/css" href="assets/css/default.css" />
 <link rel="stylesheet" type="text/css" href="assets/css/bookblock.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript">
-function createImageId(i) {
-	var $a = $("<div>", {"class": "bb-item"});
-	var $img = $("<img>",{"src": "images/newmags/file-page"+i+".jpg"});
-	$a.append($img);
-	return $a;
-}
-function additem() {
-	for (var i = 1; i <= 40; i++) {
-		console.log(createImageId(i));
-		$(".bb-bookblock").append(createImageId(i));
-	};
-}
-
-</script>
 <script src="assets/js/modernizr.custom.js"></script>
+<script src="assets/js/jquerypp.custom.js"></script>
+<script src="assets/js/jquery.bookblock.js"></script>
+<script>
+	function createImageId(i) {
+		var $a = $("<div>", {"class": "bb-item"});
+		var $img = $("<img>",{"src": "images/newmags/file-page"+i+".jpg"});
+		$a.append($img);
+		return $a;
+	}
+	function additems() {
+		for (var i = 1; i <= 40; i++) {
+			$(".bb-bookblock").append(createImageId(i));
+		};
+	}
+
+	$(window).load(function()
+	{
+		$(".bb-bookblock").css("min-height", function(){return $(this).height();});
+	});
+	$(window).resize(function() {
+		$(".bb-bookblock").css("min-height",0);
+    	$(".bb-bookblock").css("min-height", function(){return $(this).height();});
+	});
+</script>
 <div class="main clearfix">
 	<div class="bb-custom-wrapper">
 		<div id="bb-bookblock" class="bb-bookblock">
@@ -36,94 +43,90 @@ function additem() {
 		</nav>
 	</div>
 </div>
+<ul class="post-list" style="list-style-type:disc;margin-right:20px;margin-left:20px;" >
 {% for post in site.posts limit:3 %}
-  <li><article><a href="{{ site.url }}{{ post.url }}"><h2>{{ post.title }} </h2><span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>{% if post.author %}{{ post.author }}{% endif %}</span>{% if post.excerpt %} <p>{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</p>{% endif %}</a></article></li>
+  <li><article><a href="{{ site.url }}{{ post.url }}"><div class="post-title">{{ post.title }} </div><div><span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></span>{% if post.author %}<span class="entry-author"> - {{ site.data.authors[post.author].name }}</span>{% endif %}</div>{% if post.excerpt %} <p>{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</p>{% endif %}</a></article></li>
 {% endfor %}
 </ul>
-<script type="text/javascript">additem();</script>
-
-<script src="assets/js/jquerypp.custom.js"></script>
-<script src="assets/js/jquery.bookblock.js"></script>
-<script>
-			var Page = (function() {
+<script type="text/javascript">
+var Page = (function() {
 				
-				var config = {
-						$bookBlock : $( '#bb-bookblock' ),
-						$navNext : $( '#bb-nav-next' ),
-						$navPrev : $( '#bb-nav-prev' ),
-						$navFirst : $( '#bb-nav-first' ),
-						$navLast : $( '#bb-nav-last' )
-					},
-					init = function() {
-						config.$bookBlock.bookblock( {
-							speed : 1000,
-							shadowSides : 0.8,
-							shadowFlip : 0.7
-						} );
-						initEvents();
-					},
-					initEvents = function() {
+			var config = {
+					$bookBlock : $( '#bb-bookblock' ),
+					$navNext : $( '#bb-nav-next' ),
+					$navPrev : $( '#bb-nav-prev' ),
+					$navFirst : $( '#bb-nav-first' ),
+					$navLast : $( '#bb-nav-last' )
+				},
+				init = function() {
+					config.$bookBlock.bookblock( {
+						speed : 1000,
+						shadowSides : 0.8,
+						shadowFlip : 0.7
+					} );
+					initEvents();
+				},
+				initEvents = function() {
 						
-						var $slides = config.$bookBlock.children();
+					var $slides = config.$bookBlock.children();
 
 						// add navigation events
-						config.$navNext.on( 'click touchstart', function() {
+					config.$navNext.on( 'click touchstart', function() {
+						config.$bookBlock.bookblock( 'next' );
+						return false;
+					} );
+
+					config.$navPrev.on( 'click touchstart', function() {
+						config.$bookBlock.bookblock( 'prev' );
+						return false;
+					} );
+
+					config.$navFirst.on( 'click touchstart', function() {
+						config.$bookBlock.bookblock( 'first' );
+						return false;
+					} );
+
+					config.$navLast.on( 'click touchstart', function() {
+						config.$bookBlock.bookblock( 'last' );
+						return false;
+					} );
+						
+					// add swipe events
+					$slides.on( {
+						'swipeleft' : function( event ) {
 							config.$bookBlock.bookblock( 'next' );
 							return false;
-						} );
-
-						config.$navPrev.on( 'click touchstart', function() {
+						},
+						'swiperight' : function( event ) {
 							config.$bookBlock.bookblock( 'prev' );
 							return false;
-						} );
+						}
+					} );
 
-						config.$navFirst.on( 'click touchstart', function() {
-							config.$bookBlock.bookblock( 'first' );
-							return false;
-						} );
+					// add keyboard events
+					$( document ).keydown( function(e) {
+						var keyCode = e.keyCode || e.which,
+							arrow = {
+								left : 37,
+								up : 38,
+								right : 39,
+								down : 40
+							};
 
-						config.$navLast.on( 'click touchstart', function() {
-							config.$bookBlock.bookblock( 'last' );
-							return false;
-						} );
-						
-						// add swipe events
-						$slides.on( {
-							'swipeleft' : function( event ) {
-								config.$bookBlock.bookblock( 'next' );
-								return false;
-							},
-							'swiperight' : function( event ) {
+						switch (keyCode) {
+							case arrow.left:
 								config.$bookBlock.bookblock( 'prev' );
-								return false;
-							}
-						} );
+								break;
+							case arrow.right:
+								config.$bookBlock.bookblock( 'next' );
+								break;
+						}
+					} );
+				};
 
-						// add keyboard events
-						$( document ).keydown( function(e) {
-							var keyCode = e.keyCode || e.which,
-								arrow = {
-									left : 37,
-									up : 38,
-									right : 39,
-									down : 40
-								};
+				return { init : init };
 
-							switch (keyCode) {
-								case arrow.left:
-									config.$bookBlock.bookblock( 'prev' );
-									break;
-								case arrow.right:
-									config.$bookBlock.bookblock( 'next' );
-									break;
-							}
-						} );
-					};
-
-					return { init : init };
-
-			})();
-		</script>
-		<script>
-				Page.init();
-		</script>
+		})();
+		additems();
+		Page.init();
+</script>

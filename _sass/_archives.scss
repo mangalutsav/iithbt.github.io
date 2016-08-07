@@ -45,8 +45,6 @@
   .post-title {
     font-size :2rem;
     font-weight : bold;
-
-    
   }
   .entry-date {
     padding: 0px 0;
@@ -61,7 +59,6 @@
   .entry-author {
     padding: 0px 0;
     @include font-size(10,no);
-    text-transform: lowercase;
     line-height: 1;
     display: block;
     @include media($medium) {

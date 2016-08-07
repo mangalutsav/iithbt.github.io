@@ -7,7 +7,8 @@
 <style type="text/css">
   #home_page
   {
-    background: #f6f8f8;
+    /*background: #f6f8f8;*/
+    background-image: url("{{ site.url }}/images/bg.jpg");
     color: #4C4C4C;
   }
   #home_page .entry .entry-wrapper
@@ -15,17 +16,15 @@
     border-top: 1px solid #F1F1F1;
     border-right: 1px solid #E7E6E6;
     border-left: 1px solid #E7E6E6;
-    background: white;
-    border-radius: 6px;
+    background: #f6f8f8;
+    border-radius: 16px;
     border-bottom: 1px solid #CFCFCF;
-    min-height: 800px;
+    box-shadow: 0px 10px 10px rgba(81,64,49,0.3);
     max-width: 1108px;
+    width: 90%
   }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript">
-  
-</script>
 {% include head.html %}
 </head>
 
@@ -40,6 +39,7 @@
       <header class="entry-header">
         <h1 class="entry-title">{% if page.headline %}{{ page.headline }}{% else %}{{ page.title }}{% endif %}</h1>
       </header>
+      <br>
       <div class="entry-content">
         {{ content }}
       </div><!-- /.entry-content -->
