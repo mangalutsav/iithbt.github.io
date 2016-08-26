@@ -370,3 +370,13 @@ article .ct-subline a {
     margin-bottom: 10px;
     height: 100%;
 }
+
+.bb-close {
+    float: right;
+    top: 0;
+}
+
+.bb-close img {
+    height: 50px;
+    width: 50px;
+}

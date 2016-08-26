@@ -8,14 +8,15 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0, 0.8);
     overflow-x: hidden;
-    transition: 1s; 
+    transition: 0s; 
 }
 
 .bb-bookblock {
 	text-align: center;
-	width: 60%;
-	height: auto;
+	height: 100%;
+	display: inline-block;
 	margin: 0 auto;
+	margin-top: 20px;
 	position: relative;
 	z-index: 100;
 	-webkit-perspective: 1300px;
@@ -24,12 +25,12 @@
 	backface-visibility: hidden;
 }
 .bb-bookblock .bb-item img {
-	width: 100%;
-	height: auto;
+	width: auto;
+	height: 100%;
 }
 .bb-inner img {
-	width: 100%;
-	height: auto;
+	width: auto;
+	height: 100%;
 }
 
 .bb-page {
@@ -58,8 +59,20 @@
 
 .bb-page > div,
 .bb-outer,
-.bb-content,
 .bb-inner {
+	height: 100%;
+	width: auto;
+	position: relative;
+	top: 0;
+	left: 0;
+	/*box-shadow: 0px 0px 30px #888999;*/
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.bb-content {
+	height: 100%;
+	width: 200%;
 	position: relative;
 	top: 0;
 	left: 0;
@@ -221,6 +234,7 @@
 }
 
 .bb-custom-wrapper {
+	height: 90%;
 	width: inherit;
 	position: relative;
 	margin: 0 auto 40px;

@@ -19,6 +19,12 @@ search_omit: true
 		$a.append($img);
 		return $a;
 	}
+	// function addCloseButton() {
+	// 	var $a = $("<div>", {"class": "bb-close"});
+	// 	var $img = $("<img>",{"src": "images/mags/assets/close.png"});
+	// 	$a.append($img);
+	// 	return $a;
+	// }
 	function additems() {
 		$.ajax({
     		url: "images/mags/"+year+"/",
@@ -35,6 +41,7 @@ search_omit: true
         		for (var i = 1; i <= image_count; i++) {
 					$(".bb-bookblock").append(createImageId(i));
 				};
+				// $(".bb-bookblock").append(addCloseButton());
 				init();
     		}
 		});
@@ -61,6 +68,10 @@ search_omit: true
 		$(".overlay-link").click(function(){
     		openBookBlock($(this).attr('id'));
 		});
+		// $(".overlay").bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
+		// 	init();
+		// });
+
 		// $(".bb-bookblock").css("min-height", function(){return $(this).height();});
 	});
 	$(window).resize(function() {
@@ -71,6 +82,9 @@ search_omit: true
 
 <div class="overlay">
 	<div class="bb-custom-wrapper">
+		<div id="bb-close" class="bb-close" onclick="closeBookBlock()">
+			<img src="{{ site.url }}/images/mags/assets/close.png" >
+		</div>
 		<div id="bb-bookblock" class="bb-bookblock">
 		</div>
 		<nav>
