@@ -3,35 +3,73 @@ layout: home_page
 excerpt: "The Home Page of IIT HeartBeat"
 search_omit: true
 ---
-<link rel="stylesheet" type="text/css" href ="assets/css/demo1.css">
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
 <link rel="stylesheet" type="text/css" href="assets/css/bookblock.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/CircleHoverEffect.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/homepage.css" />
 <script src="assets/js/modernizr.custom.js"></script>
 <script src="assets/js/jquerypp.custom.js"></script>
 <script src="assets/js/jquery.bookblock.js"></script>
-<script>
+<script type="text/javascript">
+	var year = 2016;
 	function createImageId(i) {
 		var $a = $("<div>", {"class": "bb-item"});
-		var $img = $("<img>",{"src": "images/newmags/file-page"+i+".jpg"});
+		var $img = $("<img>",{"src": "images/mags/"+year+"/file-page"+i+".jpg"});
 		$a.append($img);
 		return $a;
 	}
 	function additems() {
-		for (var i = 1; i <= 40; i++) {
-			$(".bb-bookblock").append(createImageId(i));
-		};
+		$.ajax({
+    		url: "images/mags/"+year+"/",
+    		success: function (data) {
+    			var parser = new DOMParser(),
+            	doc = parser.parseFromString(data, 'text/html'),
+            	rows = doc.querySelector('table').querySelectorAll('tr');
+            	var image_count = 0;
+            	for (var i=1;i<rows.length;i++) {
+            		if (rows[i].children[2]) {
+                		if (parseInt(rows[i].children[2].innerText)>0) image_count++;         
+            		}
+        		}
+        		for (var i = 1; i <= image_count; i++) {
+					$(".bb-bookblock").append(createImageId(i));
+				};
+				init();
+    		}
+		});
+	}
+	function clearitems() {
+		$(".bb-bookblock").children(".bb-item").each(function() {
+			$(this).remove();
+		});
+		init();
+	}
+	
+	function openBookBlock(y) {
+    	$(".overlay").width("100%");
+    	year = y;
+    	additems();
+	}
+	function closeBookBlock() {
+    	$(".overlay").width("0");
+    	clearitems();
 	}
 
 	$(window).load(function()
 	{
-		$(".bb-bookblock").css("min-height", function(){return $(this).height();});
+		$(".overlay-link").click(function(){
+    		openBookBlock($(this).attr('id'));
+		});
+		// $(".bb-bookblock").css("min-height", function(){return $(this).height();});
 	});
 	$(window).resize(function() {
-		$(".bb-bookblock").css("min-height",0);
-    	$(".bb-bookblock").css("min-height", function(){return $(this).height();});
+		// $(".bb-bookblock").css("min-height",0);
+    	// $(".bb-bookblock").css("min-height", function(){return $(this).height();});
 	});
 </script>
-<div class="main clearfix">
+
+<div class="overlay">
 	<div class="bb-custom-wrapper">
 		<div id="bb-bookblock" class="bb-bookblock">
 		</div>
@@ -43,90 +81,143 @@ search_omit: true
 		</nav>
 	</div>
 </div>
-<ul class="post-list" style="list-style-type:disc;margin-right:20px;margin-left:20px;" >
+
+<ul class="ch-grid">
+	<li>
+		<div class="ch-item ch-img-1">
+			<div class="ch-info">
+				<h3>Issue 2015</h3>
+				<p><a id="2015" class="overlay-link">Click to Read</a></p>
+			</div>
+		</div>
+	</li>
+	<li>
+		<div class="ch-item ch-img-2">
+			<div class="ch-info">
+				<h3>Issue 2016</h3>
+				<p><a id="2016" class="overlay-link">Click to Read</a></p>
+			</div>
+		</div>
+	</li>
+	<li>
+		<div class="ch-item ch-img-3">
+			<div class="ch-info">
+				<h3>Issue 2014</h3>
+				<p><a id="2014" class="overlay-link">Click to Read</a></p>
+			</div>
+		</div>
+	</li> 
+</ul>
+
+<div class="ct-archive">
+<div class="ct-archive-container">
+{% for post in site.posts limit:10 %}
+	{% assign loopindex = forloop.index | modulo: 2 %}
+	
+	{% if loopindex == 1 %}
+			<div class="ct-row">
+			{% endif %}
+		<article id="post" class="ct-box">
+			<div class="ct-box-inner">
+				<h3>
+					<a href="{{ site.url }}{{ post.url }}" class="">{{ post.title }}</a>
+				</h3>
+				<p class="ct-subline">By {{ site.data.authors[post.author].name }} on <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></p><!--//ct-subline-->
+				<div class="ct-latest-thumb">
+					<a href="{{ site.url }}{{ post.url }}" class="ct-trans">
+						<img width="105" height="105" {% if post.image.feature %}src="{{ site.url }}/images/{{ post.image.feature }}" {% else %}src="{{ site.url }}/images/site-logo.png"{% endif %} class="attachment-thumbnail size-thumbnail wp-post-image" alt="{{ post.title }}">
+					</a>
+				</div><!-- //ct-latest-thumb-->
+				<p class="ct-feat-excerpt">{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</p><!--//ct-feat-excerpt-->
+				<div class="clr"></div>
+			</div>
+		</article>
+		{% if loopindex == 0 %}
+				</div>
+			{% endif %}
+	{% endfor %}
+	
+
+</div>
+</div>
+
+
+
+
+<!-- <ul class="post-list" style="list-style-type:disc;margin-right:20px;margin-left:20px;" >
 {% for post in site.posts limit:3 %}
   <li><article><a href="{{ site.url }}{{ post.url }}"><div class="post-title">{{ post.title }} </div><div><span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></span>{% if post.author %}<span class="entry-author"> - {{ site.data.authors[post.author].name }}</span>{% endif %}</div>{% if post.excerpt %} <p>{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</p>{% endif %}</a></article></li>
 {% endfor %}
-</ul>
+</ul> -->
+
+
+
 <script type="text/javascript">
-var Page = (function() {
-				
-			var config = {
-					$bookBlock : $( '#bb-bookblock' ),
-					$navNext : $( '#bb-nav-next' ),
-					$navPrev : $( '#bb-nav-prev' ),
-					$navFirst : $( '#bb-nav-first' ),
-					$navLast : $( '#bb-nav-last' )
-				},
-				init = function() {
-					config.$bookBlock.bookblock( {
-						speed : 1000,
-						shadowSides : 0.8,
-						shadowFlip : 0.7
-					} );
-					initEvents();
-				},
-				initEvents = function() {
-						
-					var $slides = config.$bookBlock.children();
+var config = {	$bookBlock : $( '#bb-bookblock' ),
+				$navNext : $( '#bb-nav-next' ),
+				$navPrev : $( '#bb-nav-prev' ),
+				$navFirst : $( '#bb-nav-first' ),
+				$navLast : $( '#bb-nav-last' )
+	};
+function init() {
+	config.$bookBlock.bookblock( {
+		speed : 1000,
+		shadowSides : 0.8,
+		shadowFlip : 0.7
+	} );
+	initEvents();
+}
+function initEvents() {
+	var $slides = config.$bookBlock.children();
+	// add navigation events
+	config.$navNext.on( 'click touchstart', function() {
+		config.$bookBlock.bookblock( 'next' );
+		return false;
+	} );
 
-						// add navigation events
-					config.$navNext.on( 'click touchstart', function() {
-						config.$bookBlock.bookblock( 'next' );
-						return false;
-					} );
+	config.$navPrev.on( 'click touchstart', function() {
+		config.$bookBlock.bookblock( 'prev' );
+		return false;
+	} );
 
-					config.$navPrev.on( 'click touchstart', function() {
-						config.$bookBlock.bookblock( 'prev' );
-						return false;
-					} );
+	config.$navFirst.on( 'click touchstart', function() {
+		config.$bookBlock.bookblock( 'first' );
+		return false;
+	} );
 
-					config.$navFirst.on( 'click touchstart', function() {
-						config.$bookBlock.bookblock( 'first' );
-						return false;
-					} );
+	config.$navLast.on( 'click touchstart', function() {
+		config.$bookBlock.bookblock( 'last' );
+		return false;
+	} );
+	// add swipe events
+	$slides.on( {
+		'swipeleft' : function( event ) {
+			config.$bookBlock.bookblock( 'next' );
+			return false;
+		},
+		'swiperight' : function( event ) {
+			config.$bookBlock.bookblock( 'prev' );
+			return false;
+		}
+	} );
+	// add keyboard events
+	$( document ).keydown( function(e) {
+		var keyCode = e.keyCode || e.which,
+			arrow = {
+				left : 37,
+				up : 38,
+				right : 39,
+				down : 40
+			};
 
-					config.$navLast.on( 'click touchstart', function() {
-						config.$bookBlock.bookblock( 'last' );
-						return false;
-					} );
-						
-					// add swipe events
-					$slides.on( {
-						'swipeleft' : function( event ) {
-							config.$bookBlock.bookblock( 'next' );
-							return false;
-						},
-						'swiperight' : function( event ) {
-							config.$bookBlock.bookblock( 'prev' );
-							return false;
-						}
-					} );
-
-					// add keyboard events
-					$( document ).keydown( function(e) {
-						var keyCode = e.keyCode || e.which,
-							arrow = {
-								left : 37,
-								up : 38,
-								right : 39,
-								down : 40
-							};
-
-						switch (keyCode) {
-							case arrow.left:
-								config.$bookBlock.bookblock( 'prev' );
-								break;
-							case arrow.right:
-								config.$bookBlock.bookblock( 'next' );
-								break;
-						}
-					} );
-				};
-
-				return { init : init };
-
-		})();
-		additems();
-		Page.init();
+		switch (keyCode) {
+			case arrow.left:
+				config.$bookBlock.bookblock( 'prev' );
+				break;
+			case arrow.right:
+				config.$bookBlock.bookblock( 'next' );
+				break;
+		}
+	} );
+};
 </script>
