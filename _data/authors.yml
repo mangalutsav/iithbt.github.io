@@ -1,8 +1,13 @@
 # Authors
 
+devashish:
+  name: Devashish Jog
+  email: devashishjog@gmail.com
+  bio: "President"
+  avatar: /team/images/Devashish.jpg
+
 shubham:
-  name: Shubham Palod
-  web: https://www.fb.com/shubham.pallod.7
+  name: Shubham Pallod
   email: pallodshubhamm@gmail.com
   bio: "Editorial Chief"
   avatar: /team/images/Shubham.jpg
