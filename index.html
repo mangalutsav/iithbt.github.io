@@ -11,6 +11,8 @@ search_omit: true
 <script src="assets/js/modernizr.custom.js"></script>
 <script src="assets/js/jquerypp.custom.js"></script>
 <script src="assets/js/jquery.bookblock.js"></script>
+<script src="assets/js/zepto.js"></script>
+<script src="assets/js/jquery.waterfall.js"></script>
 <script type="text/javascript">
 	var year = 2016;
 	function createImageId(i) {
@@ -96,7 +98,7 @@ search_omit: true
 	</div>
 </div>
 
-<ul class="ch-grid">
+<!-- <ul class="ch-grid">
 	<li>
 		<div class="ch-item ch-img-1">
 			<div class="ch-info">
@@ -121,9 +123,9 @@ search_omit: true
 			</div>
 		</div>
 	</li> 
-</ul>
+</ul> -->
 
-<div class="ct-archive">
+<!-- <div class="ct-archive">
 <div class="ct-archive-container">
 {% for post in site.posts limit:10 %}
 	{% assign loopindex = forloop.index | modulo: 2 %}
@@ -131,21 +133,7 @@ search_omit: true
 	{% if loopindex == 1 %}
 			<div class="ct-row">
 			{% endif %}
-		<article id="post" class="ct-box">
-			<div class="ct-box-inner">
-				<h3>
-					<a href="{{ site.url }}{{ post.url }}" class="">{{ post.title }}</a>
-				</h3>
-				<p class="ct-subline">By {{ site.data.authors[post.author].name }} on <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></p><!--//ct-subline-->
-				<div class="ct-latest-thumb">
-					<a href="{{ site.url }}{{ post.url }}" class="ct-trans">
-						<img width="105" height="105" {% if post.image.feature %}src="{{ site.url }}/images/{{ post.image.feature }}" {% else %}src="{{ site.url }}/images/site-logo.png"{% endif %} class="attachment-thumbnail size-thumbnail wp-post-image" alt="{{ post.title }}">
-					</a>
-				</div><!-- //ct-latest-thumb-->
-				<p class="ct-feat-excerpt">{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</p><!--//ct-feat-excerpt-->
-				<div class="clr"></div>
-			</div>
-		</article>
+		
 		{% if loopindex == 0 %}
 				</div>
 			{% endif %}
@@ -153,10 +141,25 @@ search_omit: true
 	
 
 </div>
+</div> -->
+<div class="waterfall" data-col-min-width="300" data-autoresize="true"> 
+{% for post in site.posts limit:10 %}
+<article class="post-box">
+    <div class="image-container">
+        <a href="{{ site.url }}{{ post.url }}" class="link"><img src="{{ site.url }}/images/{{ post.image.feature }}" alt="{{ post.title }}" class="post-image" /></a>
+    </div>
+    <div class="post-container">
+    	<a href="{{ site.url }}{{ post.url }}" class="link">
+        	<h2 class="title">{{ post.title }}</h2>
+        </a>
+        <p class="subline">By {{ site.data.authors[post.author].name }} on <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></p>
+        <p class="excerpt">
+            <span>{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</span>
+        </p>
+    </div>
+</article>
+{% endfor %}
 </div>
-
-
-
 
 <!-- <ul class="post-list" style="list-style-type:disc;margin-right:20px;margin-left:20px;" >
 {% for post in site.posts limit:3 %}
