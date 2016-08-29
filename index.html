@@ -70,6 +70,9 @@ search_omit: true
 		$(".overlay-link").click(function(){
     		openBookBlock($(this).attr('id'));
 		});
+		$(".text-link").click(function(){
+    		openBookBlock($(this).attr('id'));
+		});
 		// $(".overlay").bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
 		// 	init();
 		// });
@@ -159,14 +162,18 @@ search_omit: true
 {% endfor %}
 </div>
 <div class="latest-issue">
-		<span align="left" width="50%">
+		<span >
 			<a id="2016" class="overlay-link">
 				<img   src="{{ site.url }}/images/mags/2016/file-page1.jpg" />
 			</a>
 		</span>
 		<span >
 			<div class="description-li">
-				<p>This is litte descriptipn aboutm,........................................................................</p>
+				<p>
+				<h3 style="margin-bottom:0px"><a id="2016" class="text-link">Issue 2016</a></h3>
+				<h5 style="margin-top:0px; margin-bottom:20px;">Cover Story: "Travelling: My Life"</h5>
+				Hey folks!<br>IIT Heartbeat is back with its new edition. The wait was long but we've made sure it was worth it. In this edition, we have covered different concerned areas of student's life with a spice of fun. You are sure to have a wonderful experience while going through the articles. Information related to other IIT's, doubts related to career, fiction, poems, fun facts, alumni experinces...
+				</p>
 			</div>
 		</span>
 	</div>
