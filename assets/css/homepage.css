@@ -56,6 +56,44 @@
     box-shadow: 0px 5px 5px rgba(81,64,49,0.1);
 }
 
+.latest-issue {
+    margin: auto;
+    margin-top: 50px;
+    width: 90%;
+    border: 1px solid #E7E6E6;
+    background: #f6f8f8;
+   /* border-radius: 2px;
+    box-shadow: 0px 5px 5px rgba(81,64,49,0.1);*/
+}
+
+.latest-issue img{
+    margin: auto;
+    float: left;
+   height:400px; 
+   width:auto;
+   max-width: 50%;
+
+}
+
+.latest-issue .description-li{
+    float: right;
+   height:400px;
+   max-width: 50%; 
+   width:auto;
+   line-height: 100px;
+   display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+
+.latest-issue p{
+    display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .ct-archive .ct-box {
     font-style: normal
 }
