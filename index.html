@@ -73,16 +73,19 @@ search_omit: true
 		$(".text-link").click(function(){
     		openBookBlock($(this).attr('id'));
 		});
+		$(document).keyup(function(e) {
+  			if (e.keyCode === 27) $('.bb-close').click();   // esc
+		});
 		// $(".overlay").bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
 		// 	init();
 		// });
 
 		// $(".bb-bookblock").css("min-height", function(){return $(this).height();});
 	});
-	$(window).resize(function() {
+	// $(window).resize(function() {
 		// $(".bb-bookblock").css("min-height",0);
     	// $(".bb-bookblock").css("min-height", function(){return $(this).height();});
-	});
+	// });
 </script>
 
 <div class="overlay">
@@ -162,16 +165,17 @@ search_omit: true
 {% endfor %}
 </div>
 <div class="latest-issue">
-		<span >
-			<a id="2016" class="overlay-link">
-				<img   src="{{ site.url }}/images/mags/2016/file-page1.jpg" />
+		<span id="2016" class="overlay-link">
+			<a>
+				<img src="{{ site.url }}/images/mags/2016/file-page1.jpg">
 			</a>
 		</span>
 		<span >
 			<div class="description-li">
-				<p>
-				<h3 style="margin-bottom:0px"><a id="2016" class="text-link">Issue 2016</a></h3>
+				
+				<h3 id="2016" class="text-link" style="margin-bottom:0px">Issue 2016</h3>
 				<h5 style="margin-top:0px; margin-bottom:20px;">Cover Story: "Travelling: My Life"</h5>
+				<p>
 				Hey folks!<br>IIT Heartbeat is back with its new edition. The wait was long but we've made sure it was worth it. In this edition, we have covered different concerned areas of student's life with a spice of fun. You are sure to have a wonderful experience while going through the articles. Information related to other IIT's, doubts related to career, fiction, poems, fun facts, alumni experinces...
 				</p>
 			</div>
