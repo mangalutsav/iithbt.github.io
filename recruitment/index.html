@@ -1,0 +1,33 @@
+---
+layout: page
+title: Recruitment 2016
+excerpt: "IIT Heartbeat recruitment page 2016."
+search_omit: true
+---
+<link rel="stylesheet" href="../assets/css/tabs.css">
+<section>
+	<div class="tabs tabs-style-flip">
+		<nav>
+			<ul>
+				<li><a href="#section-flip-1" class="icon icon-plane"><span>Editorial</span></a></li>
+				<li><a href="#section-flip-2" class="icon icon-date"><span>Design</span></a></li>
+				<li><a href="#section-flip-3" class="icon icon-gift"><span>Finance</span></a></li>
+				<li><a href="#section-flip-4" class="icon icon-coffee"><span>Web Development</span></a></li>
+			</ul>
+		</nav>
+		<div class="content-wrap">
+			<section id="section-flip-1"><p>1</p></section>
+			<section id="section-flip-2"><p>2</p></section>
+			<section id="section-flip-3"><p>3</p></section>
+			<section id="section-flip-4"><p>4</p></section>
+		</div><!-- /content -->
+	</div><!-- /tabs -->
+</section>
+<script src="../assets/js/cbpFWTabs.js"></script>
+<script>
+	(function() {
+		[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+			new CBPFWTabs( el );
+		});
+	})();
+</script>
