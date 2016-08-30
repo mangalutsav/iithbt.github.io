@@ -14,39 +14,23 @@ search_omit: true
 <script src="assets/js/zepto.js"></script>
 <script src="assets/js/jquery.waterfall.js"></script>
 <script type="text/javascript">
-	var year = 2016;
+	var year = "2016";
+	var imageCount = [];
+	imageCount["2016"] = 40;
+	imageCount["2015"] = 0;
+	imageCount["2014"] = 0;
 	function createImageId(i) {
 		var $a = $("<div>", {"class": "bb-item"});
 		var $img = $("<img>",{"src": "images/mags/"+year+"/file-page"+i+".jpg"});
 		$a.append($img);
 		return $a;
 	}
-	// function addCloseButton() {
-	// 	var $a = $("<div>", {"class": "bb-close"});
-	// 	var $img = $("<img>",{"src": "images/mags/assets/close.png"});
-	// 	$a.append($img);
-	// 	return $a;
-	// }
+	
 	function additems() {
-		$.ajax({
-    		url: "images/mags/"+year+"/",
-    		success: function (data) {
-    			var parser = new DOMParser(),
-            	doc = parser.parseFromString(data, 'text/html'),
-            	rows = doc.querySelector('table').querySelectorAll('tr');
-            	var image_count = 0;
-            	for (var i=1;i<rows.length;i++) {
-            		if (rows[i].children[2]) {
-                		if (parseInt(rows[i].children[2].innerText)>0) image_count++;         
-            		}
-        		}
-        		for (var i = 1; i <= image_count; i++) {
-					$(".bb-bookblock").append(createImageId(i));
-				};
-				// $(".bb-bookblock").append(addCloseButton());
-				init();
-    		}
-		});
+		for (var i = 1; i <= imageCount[year]; i++) {
+			$(".bb-bookblock").append(createImageId(i));
+		};
+		init();
 	}
 	function clearitems() {
 		$(".bb-bookblock").children(".bb-item").each(function() {
@@ -54,7 +38,6 @@ search_omit: true
 		});
 		init();
 	}
-	
 	function openBookBlock(y) {
     	$(".overlay").width("100%");
     	year = y;
@@ -67,30 +50,21 @@ search_omit: true
 
 	$(window).load(function()
 	{
-		$(".overlay-link").click(function(){
+		$(".overlay-link").add(".text-link").click(function(){
     		openBookBlock($(this).attr('id'));
 		});
-		$(".text-link").click(function(){
-    		openBookBlock($(this).attr('id'));
+		$(".bb-close").click(function(){
+			closeBookBlock();
 		});
 		$(document).keyup(function(e) {
   			if (e.keyCode === 27) $('.bb-close').click();   // esc
 		});
-		// $(".overlay").bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
-		// 	init();
-		// });
-
-		// $(".bb-bookblock").css("min-height", function(){return $(this).height();});
 	});
-	// $(window).resize(function() {
-		// $(".bb-bookblock").css("min-height",0);
-    	// $(".bb-bookblock").css("min-height", function(){return $(this).height();});
-	// });
 </script>
 
 <div class="overlay">
 	<div class="bb-custom-wrapper">
-		<div id="bb-close" class="bb-close" onclick="closeBookBlock()">
+		<div class="bb-close">
 			<img src="{{ site.url }}/images/mags/assets/close.png" >
 		</div>
 		<div id="bb-bookblock" class="bb-bookblock">
@@ -104,48 +78,6 @@ search_omit: true
 	</div>
 </div>
 
-<!-- <ul class="ch-grid">
-	<li>
-		<div class="ch-item ch-img-1">
-			<div class="ch-info">
-				<h3>Issue 2015</h3>
-				<p><a id="2015" class="overlay-link">Click to Read</a></p>
-			</div>
-		</div>
-	</li>
-	<li>
-		<div class="ch-item ch-img-2">
-			<div class="ch-info">
-				<h3>Issue 2016</h3>
-				<p><a id="2016" class="overlay-link">Click to Read</a></p>
-			</div>
-		</div>
-	</li>
-	<li>
-		<div class="ch-item ch-img-3">
-			<div class="ch-info">
-				<h3>Issue 2014</h3>
-				<p><a id="2014" class="overlay-link">Click to Read</a></p>
-			</div>
-		</div>
-	</li> 
-</ul> -->
-
-<!-- <div class="ct-archive">
-<div class="ct-archive-container">
-{% for post in site.posts limit:10 %}
-	{% assign loopindex = forloop.index | modulo: 2 %}
-	
-	{% if loopindex == 1 %}
-			<div class="ct-row">
-			{% endif %}
-		
-		{% if loopindex == 0 %}
-				</div>
-			{% endif %}
-	{% endfor %}
-</div>
-</div> -->
 <div class="waterfall" data-col-min-width="300" data-autoresize="true"> 
 {% for post in site.posts limit:10 %}
 <article class="post-box">
@@ -165,14 +97,14 @@ search_omit: true
 {% endfor %}
 </div>
 <div class="latest-issue">
-		<span id="2016" class="overlay-link">
-			<a>
-				<img src="{{ site.url }}/images/mags/2016/file-page1.jpg">
-			</a>
+		<span class="issue-front-cover">
+			<img src="{{ site.url }}/images/mags/2016/file-page1.jpg">
+			<div class="img-overlay">
+           		<a id="2016" class="expand overlay-link">Click To Read</a>
+           	</div>
 		</span>
 		<span >
 			<div class="description-li">
-				
 				<h3 id="2016" class="text-link" style="margin-bottom:0px">Issue 2016</h3>
 				<h5 style="margin-top:0px; margin-bottom:20px;">Cover Story: "Travelling: My Life"</h5>
 				<p>
@@ -181,12 +113,6 @@ search_omit: true
 			</div>
 		</span>
 	</div>
-<!-- <ul class="post-list" style="list-style-type:disc;margin-right:20px;margin-left:20px;" >
-{% for post in site.posts limit:3 %}
-  <li><article><a href="{{ site.url }}{{ post.url }}"><div class="post-title">{{ post.title }} </div><div><span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time></span>{% if post.author %}<span class="entry-author"> - {{ site.data.authors[post.author].name }}</span>{% endif %}</div>{% if post.excerpt %} <p>{{ post.excerpt | remove: '\[ ... \]' | remove: '\( ... \)' | markdownify | strip_html | strip_newlines | escape_once }}</p>{% endif %}</a></article></li>
-{% endfor %}
-</ul> -->
-
 
 
 <script type="text/javascript">
