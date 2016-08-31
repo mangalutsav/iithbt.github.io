@@ -13,6 +13,7 @@ search_omit: true
 <script src="assets/js/jquery.bookblock.js"></script>
 <script src="assets/js/zepto.js"></script>
 <script src="assets/js/jquery.waterfall.js"></script>
+<script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript">
 	var year = "2016";
 	var imageCount = [];
@@ -60,6 +61,7 @@ search_omit: true
   			if (e.keyCode === 27) $('.bb-close').click();   // esc
 		});
 	});
+	
 </script>
 
 <div class="overlay">
@@ -116,6 +118,18 @@ search_omit: true
 
 
 <script type="text/javascript">
+
+$('.post-image').each(function() {
+	$(this).imagesLoaded()
+  		.done( function( instance ) {
+  			// console.log("called.");
+    		$('.waterfall').waterfall({ 
+    			colMinWidth: 300,
+    			autoresize: true
+  			});
+    });
+});
+
 var config = {	$bookBlock : $( '#bb-bookblock' ),
 				$navNext : $( '#bb-nav-next' ),
 				$navPrev : $( '#bb-nav-prev' ),
