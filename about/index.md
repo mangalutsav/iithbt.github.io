@@ -3,8 +3,8 @@ layout: about_page
 title: About IIT Heartbeat
 excerpt: "The Inter IIT magazine"
 image:
-  feature: header_aboutus.jpg
-  title: About Us
+  feature: about.jpg
+  <!-- title: About Us -->
 
 ---
 ## About
