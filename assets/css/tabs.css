@@ -24,6 +24,11 @@
 .tabs nav {
   text-align: center;
 }
+.tabs p {
+  font-size: "4";
+  color: rgb(34,34,34);
+  font-family: "Times New Roman", Times, serif;
+}
 
 .tabs nav ul {
   position: relative;
