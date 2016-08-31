@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .navigation-wrapper {
-  background-color: #fff;
+  background-color: #eee;
   margin: 0 0 50px;
   height: auto;
   text-align: center;
@@ -18,8 +18,8 @@
     @include clearfix;
     @include media($medium) {
 
-        float:right;
-        margin: 8px 200px 8px 0;
+        float:none;
+        margin: 8px 0px 8px 0;
     }
   }
 
