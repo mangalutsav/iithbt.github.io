@@ -5,7 +5,7 @@ categories: articles
 excerpt: Arpit Agrawal is a software engineer turned author, who had his first release in 2013 as 'Dear Life, Get Well Soon'. The book is a collection of short stories, mostly revolving around the main lead ‘Fatso’ and his troubles with life. He is now all set to release his second book 'Take My Heart Forever'. Following is an interview with the author
 author: yash
 image: 
-  feature: arpit-agarwal.png
+  feature: arpit-agarwal.jpg
 date: 2016-09-17T22:40:00+05:30
 ---
 
