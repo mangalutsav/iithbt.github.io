@@ -3,11 +3,11 @@
 - title: Home
   url: /
 
-- title: Recruitment
-  url: /recruitment/
-
 - title: Articles
   url: /articles/
+
+- title: Team
+  url: /team/
 
 - title: About
   url: /about/
